@@ -14,13 +14,8 @@ int buttonOld=1; // is 1 before you press button
 
 int buttonOldTwo=1; // is 1 before you press butto
 int dt=100;
-bool optionSelected = false;
 bool lineSelected = false;
 bool stopSelected = false;
-
-int trainLines[] = {1,2};
-int stopOne[] = {1,2,3};
-int stopTwo[] = {1,2,3};
 
 int userLine;
 int userStop; 
@@ -40,15 +35,10 @@ void setup() {
 int index = 1;
 int stopIndex = 1;
 void loop() {
-  // PSEUDOCODE
-  // check what input statement the user clicked the button on
-  // for item in array
-  // LCD display item
-  // if item == certain input && button clicked
-  // light up LED, and store the users choice
     buttonNew = digitalRead(buttonPin);
     buttonNewTwo = digitalRead(buttonPinTwo);
     if(buttonOld==0 && buttonNew==1){
+        // swap the line selection
         if(index == 1){
           index = 2;
         }
@@ -57,7 +47,6 @@ void loop() {
         }
         Serial.print("Current Index: ");
         Serial.println(index);
-        // optionSelected = true;
         userLine = index;
     }
     buttonOld=buttonNew;
@@ -66,7 +55,6 @@ void loop() {
     if(buttonOldTwo==0 && buttonNewTwo==1){
         Serial.print("Selected Index: ");
         Serial.print(index);
-        // optionSelected = false;
         digitalWrite(LEDPin, HIGH);
         // if line is already selected, this means the input to confirm is the stop
         if(lineSelected){
@@ -76,9 +64,6 @@ void loop() {
         lineSelected = true;
     }
     buttonOldTwo=buttonNewTwo;
-    // // deal with the stop index
-    // if(lineSelected){
-    //   stopIndex++;
-    // }
+    // deal with the stop index
     delay(dt);
 }  
